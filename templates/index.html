@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <title>Kannada Translate | English to Kannada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Kannada Translate home">
+        <span class="brand-mark">ಕ</span>
+        <span>Kannada<span class="brand-light">Translate</span></span>
+      </a>
+      <span class="offline-pill"><span class="status-dot"></span> Dictionary mode</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow"><span>EN</span><span class="eyebrow-arrow">↔</span><span>ಕನ್ನಡ</span></div>
+        <h1>Words connect us.</h1>
+        <p class="subtitle">Simple English to Kannada translations, made easy.</p>
+      </section>
+
+      <section class="translator-card" aria-labelledby="translator-title">
+        <div class="card-heading">
+          <div>
+            <p class="section-kicker">TRANSLATOR</p>
+            <h2 id="translator-title">What would you like to say?</h2>
+          </div>
+          <div class="language-pair"><span>English</span><span class="pair-arrow">→</span><span>ಕನ್ನಡ</span></div>
+        </div>
+
+        <form id="translate-form">
+          <label for="english-input">Enter a word or phrase</label>
+          <div class="input-wrap">
+            <textarea id="english-input" rows="3" maxlength="160" placeholder="Type something in English..." autocomplete="off"></textarea>
+            <span class="char-count" id="char-count">0 / 160</span>
+          </div>
+          <div class="form-bottom">
+            <span class="hint">Try “hello” or “thank you”</span>
+            <button class="translate-button" id="translate-button" type="submit">
+              <span>Translate</span><span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="result-panel" id="result-panel" aria-live="polite">
+          <div class="result-topline">
+            <span class="result-label"><span class="result-dot"></span> KANNADA TRANSLATION</span>
+            <button class="icon-button" id="copy-button" type="button" disabled aria-label="Copy translation" title="Copy translation">▢ <span>Copy</span></button>
+          </div>
+          <p class="result-text placeholder-result" id="result-text">Your translation will appear here.</p>
+          <p class="result-message" id="result-message">Translations are matched from a built-in dictionary.</p>
+        </div>
+        <p class="error-message" id="error-message" role="alert"></p>
+      </section>
+
+      <section class="examples-section">
+        <div class="section-title-row">
+          <div>
+            <p class="section-kicker">GET STARTED</p>
+            <h2>Try a common phrase</h2>
+          </div>
+          <span class="small-note">Tap to fill</span>
+        </div>
+        <div class="phrase-grid">
+          {% for phrase in examples %}
+          <button class="phrase-chip" type="button" data-phrase="{{ phrase }}">
+            <span>{{ phrase }}</span><span class="chip-arrow">↗</span>
+          </button>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="history-section">
+        <div class="section-title-row">
+          <div>
+            <p class="section-kicker">YOUR RECENT LOOKUPS</p>
+            <h2>Translation history</h2>
+          </div>
+          <button class="text-button" id="clear-history" type="button">Clear history</button>
+        </div>
+        <div id="history-list" class="history-list">
+          <div class="empty-history"><span class="empty-history-icon">↻</span><span>Your recent translations will show up here.</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="footer-brand"><span class="brand-mark small">ಕ</span> KannadaTranslate</span>
+      <span>A simple mini project built with Flask + Python</span>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
